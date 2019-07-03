@@ -14,7 +14,7 @@ declare global {
     type Config = Omit<AxiosRequestConfig, "baseURL" | "body">;
   }
 
-  interface GlobalClient {
+  export interface GlobalClient {
     get<T>(url: string, config: GlobalClient.Config): Promise<T>;
 
     post<T>(

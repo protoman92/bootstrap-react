@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "axios": "^0.19.0",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
@@ -15,7 +17,9 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start:be:dev": "nodemon",
+    "start:fe:dev": "HTTPS=true react-scripts start",
+    "start:dev": "concurrently \"yarn start:be:dev\" \"yarn start:fe:dev\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -36,18 +40,23 @@
     ]
   },
   "devDependencies": {
+    "@types/dotenv": "^6.1.1",
     "@types/enzyme": "^3.10.1",
     "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/express": "^4.17.0",
     "@types/jest": "^24.0.15",
     "@types/react-dom": "^16.8.4",
     "@types/react-redux": "^7.1.1",
     "@types/react-router-dom": "^4.3.4",
+    "concurrently": "^4.1.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "expect.js": "^0.3.1",
     "node-sass": "^4.12.0",
+    "nodemon": "^1.19.1",
     "ts-essentials": "^2.0.11",
     "typescript": "^3.5.2",
     "why-did-you-update": "^1.0.6"
-  }
+  },
+  "proxy": "https://localhost:8000"
 }

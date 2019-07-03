@@ -4,7 +4,11 @@
     "module": "esnext",
     "strict": true,
     "esModuleInterop": true,
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
@@ -13,8 +17,11 @@
     "resolveJsonModule": true,
     "noEmit": true,
     "jsx": "preserve",
-    "baseUrl": "src/",
-    "isolatedModules": true
+    "baseUrl": "src",
+    "isolatedModules": true,
+    "checkJs": true
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }
