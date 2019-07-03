@@ -11,10 +11,10 @@ declare global {
   }
 
   namespace GlobalClient {
-    type Config = Omit<AxiosRequestConfig, "baseURL" | "body">;
+    type Config = Omit<AxiosRequestConfig, "body">;
   }
 
-  export interface GlobalClient {
+  interface GlobalClient {
     get<T>(url: string, config: GlobalClient.Config): Promise<T>;
 
     post<T>(

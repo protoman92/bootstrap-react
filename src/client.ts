@@ -1,12 +1,9 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 
-export default function({
-  baseURL
-}: Pick<AxiosRequestConfig, "baseURL">): GlobalClient {
+export default function(): GlobalClient {
   return {
-    get: (url, config) =>
-      axios.get(url, { baseURL, ...config }).then(({ data }) => data),
+    get: (url, config) => axios.get(url, config).then(({ data }) => data),
     post: (url, body, config) =>
-      axios.post(url, body, { baseURL, ...config }).then(({ data }) => data)
+      axios.post(url, body, config).then(({ data }) => data)
   };
 }
