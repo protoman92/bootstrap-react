@@ -10171,6 +10171,11 @@ trough@^1.0.0:
   dependencies:
     glob "^7.1.2"
 
+ts-essentials@^2.0.11:
+  version "2.0.11"
+  resolved "https://registry.yarnpkg.com/ts-essentials/-/ts-essentials-2.0.11.tgz#dc4d5f7c81785d3f624311c70927a9ee128cc385"
+  integrity sha512-614uBuD5StmKpJFDio+v3JhGELXMk1TrOJYuP/16q8haNUBsDmG0dI7+sN5Qhukwi2drbvUqdIOlrMKeBpdjwQ==
+
 ts-pnp@1.1.2, ts-pnp@^1.0.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/ts-pnp/-/ts-pnp-1.1.2.tgz#be8e4bfce5d00f0f58e0666a82260c34a57af552"
