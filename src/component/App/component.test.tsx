@@ -1,9 +1,8 @@
-import { shallow } from "enzyme";
-import React from "react";
+import enzyme from "enzyme";
 import App from "./component";
 
 describe("Component test", () => {
   it("Shallow test", () => {
-    shallow(<App />);
+    enzyme.shallowWithProps(App, {});
   });
 });
