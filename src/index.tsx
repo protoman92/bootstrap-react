@@ -1,3 +1,5 @@
+import App from "component/App/component";
+import "index.scss";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
@@ -5,9 +7,7 @@ import { applyMiddleware, createStore } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { thunkUnwrapMiddleware } from "redux/middleware";
 import createReducer from "redux/reducer";
-import App from "./component/App/App";
-import "./index.scss";
-import * as serviceWorker from "./serviceWorker";
+import * as serviceWorker from "serviceWorker";
 
 const reducer = createReducer();
 

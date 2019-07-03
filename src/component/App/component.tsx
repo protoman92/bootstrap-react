@@ -1,8 +1,8 @@
 import React from "react";
 import "./style.scss";
 
-function App() {
+function PrivateApp() {
   return <div className="App" />;
 }
 
-export default App;
+export default PrivateApp;
