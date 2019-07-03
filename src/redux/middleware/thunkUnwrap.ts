@@ -1,5 +1,4 @@
 import { Middleware } from "redux";
-import { GlobalAction } from "react-app-env";
 
 export default function(): Middleware<{}, GlobalAction<any>> {
   return () => dispatch => (action: GlobalAction<any>) => {

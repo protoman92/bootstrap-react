@@ -1,8 +1,10 @@
 /// <reference types="react-scripts" />
 import { Action } from "redux";
 
-interface GlobalState {}
+declare global {
+  interface GlobalState {}
 
-interface GlobalAction<Payload> extends Action<string> {
-  payload: Payload;
+  interface GlobalAction<Payload> extends Action<string> {
+    payload: Payload;
+  }
 }
