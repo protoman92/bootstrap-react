@@ -1,28 +1,13 @@
 @import "src/global";
 
 .drawer-container {
-  background: $app-primary-color;
-  display: flex;
-  flex-direction: column;
-  padding: 8px;
-
   & > * {
-    &:not(:first-child) {
-      margin-top: 8px;
-    }
+    height: 48px;
 
-    &.tab {
+    .tab {
       align-items: center;
-      background: rgb(240, 240, 240);
-      color: black;
       display: flex;
-      padding: 4px;
       text-decoration: none;
-
-      &:hover,
-      &.active-tab {
-        background: white;
-      }
 
       & > * {
         &:not(:first-child) {
@@ -30,12 +15,6 @@
         }
 
         flex: 1 0 0;
-      }
-
-      img {
-        border-radius: 50%;
-        flex: 0 0 40px;
-        height: 40px;
       }
     }
   }

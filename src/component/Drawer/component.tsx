@@ -1,33 +1,35 @@
+import { Menu } from "antd";
 import React from "react";
 import { NavLink } from "react-router-dom";
-import "./style.scss";
 import { compose, shouldUpdate } from "recompose";
+import "./style.scss";
 
 interface DrawerItem {
   readonly path: string;
   readonly name: string;
-  readonly icon: string;
 }
 
 interface DrawerProps {
-  readonly paths: readonly DrawerItem[];
+  readonly currentPath: string;
+  readonly items: readonly DrawerItem[];
 }
 
-function PrivateDrawer({ paths: items }: DrawerProps) {
+function PrivateDrawer({ currentPath, items }: DrawerProps) {
   return (
-    <div className="drawer-container">
-      {items.map(({ icon, path, name }) => (
-        <NavLink
-          className="tab"
-          activeClassName={"active-tab"}
-          key={path}
-          to={path}
-        >
-          <img alt={name} src={icon} />
-          <div>{name}</div>
-        </NavLink>
+    <Menu
+      className="drawer-container"
+      selectedKeys={items
+        .filter(({ path }) => currentPath.startsWith(path))
+        .map(({ path }) => path)}
+    >
+      {items.map(({ path, name }) => (
+        <Menu.Item key={path}>
+          <NavLink className="tab" activeClassName={"active-tab"} to={path}>
+            <div>{name}</div>
+          </NavLink>
+        </Menu.Item>
       ))}
-    </div>
+    </Menu>
   );
 }
 

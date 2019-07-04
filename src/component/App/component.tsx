@@ -8,19 +8,13 @@ export default function App() {
   return (
     <Switch>
       <Route
-        render={() => (
+        render={({ location: { pathname: currentPath } }) => (
           <div className="App">
             <div className="app-content">
               <div className="side-drawer">
                 <Drawer
-                  paths={[
-                    {
-                      icon:
-                        "https://material.io/tools/icons/static/icons/round-supervised_user_circle-24px.svg",
-                      path: "/user",
-                      name: "User"
-                    }
-                  ]}
+                  currentPath={currentPath}
+                  items={[{ path: "/user", name: "User" }]}
                 />
               </div>
 
