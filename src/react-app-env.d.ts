@@ -10,7 +10,7 @@ declare global {
   type DeepWriteable<T> = import("ts-essentials").DeepWritable<T>;
 
   interface ReduxState {
-    readonly httpClient: RelativeHTTPClient;
+    readonly repository: APIRepository;
   }
 
   interface ReduxAction<Payload> extends Action<string> {
@@ -18,14 +18,14 @@ declare global {
   }
 
   namespace HTTPClient {
-    type Config = Omit<AxiosRequestConfig, "body">;
+    type Config = Omit<AxiosRequestConfig, "baseURL">;
   }
 
   /** Standard HTTP client that can perform API requests. */
   interface HTTPClient {
-    get<T>(url: string, headers?: {}): Promise<T>;
-    post<T>(url: string, body: unknown, headers?: {}): Promise<T>;
-    patch<T>(url: string, body: unknown, headers?: {}): Promise<T>;
+    get<T>(url: string, c?: HTTPClient.Config): Promise<T>;
+    post<T>(url: string, body: unknown, c?: HTTPClient.Config): Promise<T>;
+    patch<T>(url: string, body: unknown, c?: HTTPClient.Config): Promise<T>;
   }
 
   /**
@@ -39,7 +39,16 @@ declare global {
    */
   interface RelativeHTTPClient extends HTTPClient {}
 
-  namespace APIRepository {}
+  namespace APIRepository {
+    interface URLSync {
+      get<T>(): Promise<T>;
+      update<T>(newData: T): Promise<T>;
+    }
+  }
+
+  interface APIRepository {
+    readonly urlSync: APIRepository.URLSync;
+  }
 
   interface AppUser {
     readonly id: string;

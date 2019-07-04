@@ -3,19 +3,17 @@ import axios from "axios";
 export function createBaseClient(): HTTPClient {
   const baseHeaders = { "Content-Type": "application/json" };
 
+  function createConfig(config?: HTTPClient.Config): HTTPClient.Config {
+    return { ...baseHeaders, ...(!!config ? config.headers : {}) };
+  }
+
   return {
-    get: (url, headers) =>
-      axios
-        .get(url, { headers: { ...baseHeaders, ...headers } })
-        .then(({ data }) => data),
-    post: (url, body, headers) =>
-      axios
-        .post(url, body, { headers: { ...baseHeaders, ...headers } })
-        .then(({ data }) => data),
-    patch: (url, body, headers) =>
-      axios
-        .patch(url, body, { headers: { ...baseHeaders, ...headers } })
-        .then(({ data }) => data)
+    get: (url, config) =>
+      axios.get(url, createConfig(config)).then(({ data }) => data),
+    post: (url, body, config) =>
+      axios.post(url, body, createConfig(config)).then(({ data }) => data),
+    patch: (url, body, config) =>
+      axios.patch(url, body, createConfig(config)).then(({ data }) => data)
   };
 }
 
@@ -37,8 +35,8 @@ export function createRelativeClient(
   }
 
   return {
-    get: (url, headers) => client.get(getFullURL(url), headers),
-    post: (url, body, headers) => client.post(getFullURL(url), body, headers),
-    patch: (url, body, headers) => client.patch(getFullURL(url), body, headers)
+    get: (url, config) => client.get(getFullURL(url), config),
+    post: (url, body, config) => client.post(getFullURL(url), body, config),
+    patch: (url, body, config) => client.patch(getFullURL(url), body, config)
   };
 }

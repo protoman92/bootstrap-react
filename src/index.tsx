@@ -10,6 +10,7 @@ import thunkMiddleware from "redux-thunk";
 import { thunkUnwrapMiddleware } from "redux/middleware";
 import createReducer from "redux/reducer";
 import * as serviceWorker from "serviceWorker";
+import createURLSyncRepository from "repository/urlSync";
 
 if (process.env.NODE_ENV !== "production") {
   const { whyDidYouUpdate } = require("why-did-you-update");
@@ -18,14 +19,18 @@ if (process.env.NODE_ENV !== "production") {
 
 const reducer = createReducer();
 const baseHTTPClient = createBaseClient();
-const httpClient = createRelativeClient(window, baseHTTPClient);
+const relativeClient = createRelativeClient(window, baseHTTPClient);
+
+const repository: APIRepository = {
+  urlSync: createURLSyncRepository(window, relativeClient)
+};
 
 const store = createStore(
   reducer,
-  { httpClient },
+  { repository },
   applyMiddleware(
     thunkUnwrapMiddleware(),
-    thunkMiddleware.withExtraArgument({})
+    thunkMiddleware.withExtraArgument(repository)
   )
 );
 

@@ -1,7 +1,5 @@
 import enzyme from "enzyme";
 import expect from "expect.js";
-import * as H from "history";
-import querystring from "querystring";
 import React from "react";
 import { Provider } from "react-redux";
 import { asyncTimeout, createTestComponent, createTestStore } from "testUtils";
@@ -15,29 +13,24 @@ describe("Auto URL data sync", () => {
     readonly c: number;
   }
 
-  let client: RelativeHTTPClient;
+  let urlSync: APIRepository.URLSync;
   const TestComponent = createTestComponent<AutoURLDataSyncProps<Data>>();
   const EnhancedComponent = autoURLDataSync<Data>()(TestComponent);
-  const pathname = "/user/1";
-  const params = { a: "1", b: "2" };
-  const search = `?${querystring.stringify(params)}`;
-  const location: H.Location = { pathname, search, state: {}, hash: "" };
   let WrappedElement: JSX.Element;
 
   beforeEach(() => {
-    client = spy<RelativeHTTPClient>({
+    urlSync = spy<APIRepository.URLSync>({
       get: () => Promise.reject(""),
-      post: () => Promise.reject(""),
-      patch: () => Promise.reject("")
+      update: () => Promise.reject("")
     });
 
     const testStore = createTestStore(undefined, {
-      httpClient: instance(client)
+      repository: { urlSync: instance(urlSync) }
     });
 
     WrappedElement = (
       <Provider store={testStore}>
-        <EnhancedComponent location={location} />
+        <EnhancedComponent />
       </Provider>
     );
   });
@@ -45,7 +38,7 @@ describe("Auto URL data sync", () => {
   it("Should perform get automatically", async () => {
     // Setup
     const data: Data = { a: 0, b: 1, c: 2 };
-    when(client.get(pathname, anything())).thenResolve(data);
+    when(urlSync.get()).thenResolve(data);
 
     // When
     const wrapper = enzyme.mount(WrappedElement);
@@ -54,7 +47,7 @@ describe("Auto URL data sync", () => {
     const { data: propData } = wrapper.find(TestComponent).props();
 
     // Then
-    verify(client.get(pathname, deepEqual({ params }))).once();
+    verify(urlSync.get()).once();
     expect(propData).to.eql(data);
   });
 
@@ -62,8 +55,8 @@ describe("Auto URL data sync", () => {
     // Setup
     const data: Data = { a: 0, b: 1, c: 2 };
     const newData: Data = { a: 1, b: 2, c: 3 };
-    when(client.get(pathname, anything())).thenResolve(data);
-    when(client.patch(pathname, anything(), anything())).thenResolve(newData);
+    when(urlSync.get()).thenResolve(data);
+    when(urlSync.update(anything())).thenResolve(newData);
 
     // When
     const wrapper = enzyme.mount(WrappedElement);
@@ -82,12 +75,8 @@ describe("Auto URL data sync", () => {
     await asyncTimeout(1);
 
     // Then
-    verify(client.get(pathname, deepEqual({ params }))).once();
-
-    verify(
-      client.patch(pathname, deepEqual(newData), deepEqual({ params }))
-    ).once();
-
+    verify(urlSync.get()).once();
+    verify(urlSync.update(deepEqual(newData))).once();
     expect(propData).to.eql(newData);
   });
 });

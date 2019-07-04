@@ -1,6 +1,4 @@
-import querystring from "querystring";
 import { connect } from "react-redux";
-import { RouteComponentProps } from "react-router-dom";
 import {
   ComponentEnhancer,
   compose,
@@ -23,41 +21,27 @@ export interface AutoURLDataSyncProps<Data> {
  */
 export function autoURLDataSync<Data>(): ComponentEnhancer<
   AutoURLDataSyncProps<Data>,
-  Pick<RouteComponentProps<any>, "location">
+  {}
 > {
   return compose(
-    mapProps<any, any>(({ location: { pathname, search }, ...rest }) => ({
-      ...rest,
-      pathname,
-      pathParams: { ...querystring.parse(search.slice(1)) }
-    })),
     withState("data", "setData", undefined),
-    connect(({ httpClient }: ReduxState) => ({ httpClient })),
+    connect(({ repository: { urlSync } }: ReduxState) => ({ urlSync })),
     lifecycle({
       async componentDidMount() {
-        const { httpClient, pathname, pathParams: params } = this.props as any;
-        const data = await httpClient.get(pathname, { params });
+        const { urlSync } = this.props as any;
+        const data = await urlSync.get();
         (this.props as any).setData(data);
       }
     }),
-    mapProps<any, any>(
-      ({
-        httpClient,
-        data,
-        pathname,
-        pathParams: params,
-        setData,
-        ...rest
-      }) => ({
-        ...rest,
-        data,
-        saveData: async () => {
-          const updated = await httpClient.patch(pathname, data, { params });
-          setData(updated);
-        },
-        updateData: (newData: Partial<Data>) =>
-          setData(Object.assign({}, data, newData))
-      })
-    )
+    mapProps<any, any>(({ urlSync, data, setData, ...rest }) => ({
+      ...rest,
+      data,
+      saveData: async () => {
+        const updated = await urlSync.update(data);
+        setData(updated);
+      },
+      updateData: (newData: Partial<Data>) =>
+        setData(Object.assign({}, data, newData))
+    }))
   );
 }
