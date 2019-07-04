@@ -9,7 +9,7 @@ import {
 import { connect } from "react-redux";
 
 export interface AutoURLDataSyncProps<Data> {
-  readonly data: Data;
+  readonly data: Data | null | undefined;
 }
 
 /**
@@ -23,7 +23,7 @@ export function autoURLDataSync<Data>(): ComponentEnhancer<
   Pick<RouteComponentProps<any>, "location">
 > {
   return compose(
-    withState("data", "setData", {}),
+    withState("data", "setData", undefined),
     connect(({ httpClient }: ReduxState) => ({ httpClient })),
     lifecycle({
       async componentDidMount() {
