@@ -33,9 +33,10 @@
   background: $app-primary-color;
   color: white;
   display: flex;
+  height: 40px;
   justify-content: center;
   margin-left: auto;
-  padding: 8px;
+  padding: 0 8px;
   width: 50%;
 
   &:hover {

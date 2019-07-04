@@ -6,6 +6,7 @@ import { compose, shouldUpdate } from "recompose";
 interface DrawerItem {
   readonly path: string;
   readonly name: string;
+  readonly icon: string;
 }
 
 interface DrawerProps {
@@ -15,9 +16,15 @@ interface DrawerProps {
 function PrivateDrawer({ paths: items }: DrawerProps) {
   return (
     <div className="drawer-container">
-      {items.map(({ path, name }) => (
-        <NavLink activeClassName={"active-tab"} exact key={path} to={path}>
-          {name}
+      {items.map(({ icon, path, name }) => (
+        <NavLink
+          className="tab"
+          activeClassName={"active-tab"}
+          key={path}
+          to={path}
+        >
+          <img alt={name} src={icon} />
+          <div>{name}</div>
         </NavLink>
       ))}
     </div>
