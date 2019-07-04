@@ -1,5 +1,6 @@
 /** @param {HTTPClient} client */
 function getUser(client) {
+  /** @param {Request} req */
   return async ({ params: { id } }, res) => {
     res
       .status(200)

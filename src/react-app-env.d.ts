@@ -1,9 +1,14 @@
 /// <reference types="react-scripts" />
 import { AxiosRequestConfig } from "axios";
 import { Action } from "redux";
-import { Omit } from "ts-essentials";
 
 declare global {
+  type OmitKeys<T, K extends keyof T> = import("ts-essentials").Omit<T, K>;
+  type DeepPartial<T> = import("ts-essentials").DeepPartial<T>;
+  type DeepRequired<T> = import("ts-essentials").DeepRequired<T>;
+  type DeepReadonly<T> = import("ts-essentials").DeepReadonly<T>;
+  type DeepWriteable<T> = import("ts-essentials").DeepWritable<T>;
+
   interface ReduxState {
     readonly httpClient: RelativeHTTPClient;
   }
