@@ -27,3 +27,25 @@
     @content;
   }
 }
+
+@mixin confirm-button {
+  align-items: center;
+  background: $app-primary-color;
+  color: white;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  padding: 8px;
+  width: 50%;
+
+  &:hover {
+    background: $app-secondary-color;
+  }
+
+  @include md {
+    width: calc(100% / 3);
+  }
+}
+
+$app-primary-color: grey;
+$app-secondary-color: lightgrey;

@@ -9,5 +9,9 @@
     &:not(:first-child) {
       margin-top: 8px;
     }
+
+    &.update {
+      @include confirm-button;
+    }
   }
 }

@@ -11,6 +11,7 @@ import {
 
 export interface AutoURLDataSyncProps<Data> {
   readonly data: Data | null | undefined;
+  saveData(): void;
   updateData(data: Partial<Data>): void;
 }
 
@@ -25,25 +26,39 @@ export function autoURLDataSync<Data>(): ComponentEnhancer<
   Pick<RouteComponentProps<any>, "location">
 > {
   return compose(
+    mapProps<any, any>(({ location: { pathname, search }, ...rest }) => ({
+      ...rest,
+      pathname,
+      pathParams: { ...querystring.parse(search.slice(1)) }
+    })),
     withState("data", "setData", undefined),
     connect(({ httpClient }: ReduxState) => ({ httpClient })),
     lifecycle({
       async componentDidMount() {
-        const {
-          location: { pathname, search }
-        }: RouteComponentProps = this.props as any;
-
-        const params = { ...querystring.parse(search.slice(1)) };
+        const { pathname, pathParams: params } = this.props as any;
         const httpClient: RelativeHTTPClient = (this.props as any).httpClient;
         const data = await httpClient.get<Data>(pathname, { params });
         (this.props as any).setData(data);
       }
     }),
-    mapProps<any, any>(({ data, setData, ...rest }) => ({
-      ...rest,
-      data,
-      updateData: (newData: Partial<Data>) =>
-        setData(Object.assign({}, data, newData))
-    }))
+    mapProps<any, any>(
+      ({
+        httpClient,
+        data,
+        pathname,
+        pathParams: params,
+        setData,
+        ...rest
+      }) => ({
+        ...rest,
+        data,
+        saveData: async () => {
+          const updated = await httpClient.patch(pathname, data, { params });
+          setData(updated);
+        },
+        updateData: (newData: Partial<Data>) =>
+          setData(Object.assign({}, data, newData))
+      })
+    )
   );
 }

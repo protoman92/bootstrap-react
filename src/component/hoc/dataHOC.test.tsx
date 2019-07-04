@@ -25,7 +25,8 @@ describe("Auto URL data sync", () => {
   beforeEach(() => {
     client = spy<RelativeHTTPClient>({
       get: () => Promise.reject(""),
-      post: () => Promise.reject("")
+      post: () => Promise.reject(""),
+      patch: () => Promise.reject("")
     });
 
     const testStore = createTestStore(undefined, {

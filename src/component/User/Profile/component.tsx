@@ -3,7 +3,11 @@ import React from "react";
 import { compose } from "recompose";
 import "./style.scss";
 
-function PrivateProfile({ data, updateData }: AutoURLDataSyncProps<AppUser>) {
+function PrivateProfile({
+  data,
+  saveData,
+  updateData
+}: AutoURLDataSyncProps<AppUser>) {
   return (
     <div className="profile-container">
       {!!data && (
@@ -30,6 +34,9 @@ function PrivateProfile({ data, updateData }: AutoURLDataSyncProps<AppUser>) {
             }
             value={data.username}
           />
+          <div className="update" onClick={saveData}>
+            Update user
+          </div>
         </>
       )}
     </div>
