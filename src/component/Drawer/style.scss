@@ -1,0 +1,28 @@
+@import "src/global";
+
+.drawer-container {
+  background: $app-primary-color;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+
+  a {
+    align-items: center;
+    background: darkgrey;
+    color: white;
+    display: flex;
+    padding: 8px;
+    text-decoration: none;
+  }
+
+  .active-tab {
+    background: white;
+    color: black;
+  }
+
+  & > * {
+    &:not(:first-child) {
+      margin-top: 8px;
+    }
+  }
+}
