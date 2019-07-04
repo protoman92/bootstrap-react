@@ -5,6 +5,7 @@ const fs = require("fs");
 const https = require("https");
 const app = express();
 const createClient = require("./client");
+const { UserModel } = require("./mongo/user");
 const createUserRouter = require("./route/user");
 
 config({});
@@ -12,7 +13,12 @@ app.use(express.json());
 app.get("/", (req, res) => res.status(200).send("Hello world"));
 
 const client = createClient();
-const userRouter = createUserRouter(express.Router(), client);
+
+const userRouter = createUserRouter(express.Router(), {
+  client,
+  userModel: UserModel
+});
+
 app.use("/user", userRouter);
 
 const port = process.env.PORT || 8000;

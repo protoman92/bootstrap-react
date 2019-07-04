@@ -1,20 +1,22 @@
-/** @param {HTTPClient} client */
-function getUser(client) {
+/** @param {MongoModel.User} userModel */
+function getUser(userModel) {
   /** @param {Request} req */
   return async ({ params: { id } }, res) => {
-    res
-      .status(200)
-      .json({ id, firstName: "Hai", lastName: "Pham", username: "haipham" });
+    const { _id, ...user } = await userModel.findById(id);
+    res.status(200).json({ id, ...user });
   };
 }
 
 /**
  * Create the user router.
+ * @typedef Args
+ * @property {HTTPClient} client
+ * @property {MongoModel.User} userModel
  * @param {import('express').Router} router
- * @param {HTTPClient} client
+ * @param {Args} args
  * @return {import('express').Router}
  */
-module.exports = function(router, client) {
-  router.get("/:id", getUser(client));
+module.exports = function(router, { userModel }) {
+  router.get("/:id", getUser(userModel));
   return router;
 };
