@@ -1,12 +1,21 @@
 import axios from "axios";
 
 export function createBaseClient(): HTTPClient {
+  const baseHeaders = { "Content-Type": "application/json" };
+
   return {
-    get: (url, config) => axios.get(url, config).then(({ data }) => data),
-    post: (url, body, config) =>
-      axios.post(url, body, config).then(({ data }) => data),
-    patch: (url, body, config) =>
-      axios.patch(url, body, config).then(({ data }) => data)
+    get: (url, headers) =>
+      axios
+        .get(url, { headers: { ...baseHeaders, ...headers } })
+        .then(({ data }) => data),
+    post: (url, body, headers) =>
+      axios
+        .post(url, body, { headers: { ...baseHeaders, ...headers } })
+        .then(({ data }) => data),
+    patch: (url, body, headers) =>
+      axios
+        .patch(url, body, { headers: { ...baseHeaders, ...headers } })
+        .then(({ data }) => data)
   };
 }
 
@@ -23,12 +32,13 @@ export function createRelativeClient(
   window: Window,
   client: HTTPClient
 ): RelativeHTTPClient {
+  function getFullURL(url: string): string {
+    return `${window.location.origin}${url}`;
+  }
+
   return {
-    get: (url, config) =>
-      client.get(url, { ...config, baseURL: window.location.origin }),
-    post: (url, body, config) =>
-      client.post(url, body, { ...config, baseURL: window.location.origin }),
-    patch: (url, body, config) =>
-      client.patch(url, body, { ...config, baseURL: window.location.origin })
+    get: (url, headers) => client.get(getFullURL(url), headers),
+    post: (url, body, headers) => client.post(getFullURL(url), body, headers),
+    patch: (url, body, headers) => client.patch(getFullURL(url), body, headers)
   };
 }

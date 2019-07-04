@@ -35,9 +35,8 @@ export function autoURLDataSync<Data>(): ComponentEnhancer<
     connect(({ httpClient }: ReduxState) => ({ httpClient })),
     lifecycle({
       async componentDidMount() {
-        const { pathname, pathParams: params } = this.props as any;
-        const httpClient: RelativeHTTPClient = (this.props as any).httpClient;
-        const data = await httpClient.get<Data>(pathname, { params });
+        const { httpClient, pathname, pathParams: params } = this.props as any;
+        const data = await httpClient.get(pathname, { params });
         (this.props as any).setData(data);
       }
     }),

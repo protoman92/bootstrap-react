@@ -22,14 +22,10 @@ declare global {
   }
 
   /** Standard HTTP client that can perform API requests. */
-  interface HTTPClient<Config = HTTPClient.Config> {
-    get<T>(url: string, config?: Config): Promise<T>;
-    post<T>(url: string, body: unknown, config?: Config): Promise<T>;
-    patch<T>(url: string, body: unknown, config?: Config): Promise<T>;
-  }
-
-  namespace RelativeHTTPClient {
-    type Config = Omit<AxiosRequestConfig, "baseURL" | "body">;
+  interface HTTPClient {
+    get<T>(url: string, headers?: {}): Promise<T>;
+    post<T>(url: string, body: unknown, headers?: {}): Promise<T>;
+    patch<T>(url: string, body: unknown, headers?: {}): Promise<T>;
   }
 
   /**
@@ -41,7 +37,7 @@ declare global {
    * client -> https://localhost:8000/user/
    * server -> https://localhost:8000/user/1
    */
-  interface RelativeHTTPClient extends HTTPClient<RelativeHTTPClient.Config> {}
+  interface RelativeHTTPClient extends HTTPClient {}
 
   namespace APIRepository {}
 
