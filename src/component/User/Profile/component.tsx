@@ -1,3 +1,4 @@
+import { Button } from "antd";
 import { autoURLDataSync, AutoURLDataSyncProps } from "component/hoc/dataHOC";
 import React from "react";
 import { compose } from "recompose";
@@ -14,29 +15,33 @@ function PrivateProfile({
         <>
           <input
             onChange={({ target: { value: id } }) => updateData({ id })}
+            spellCheck={false}
             value={data.id}
           />
           <input
             onChange={({ target: { value: firstName } }) =>
               updateData({ firstName })
             }
+            spellCheck={false}
             value={data.firstName}
           />
           <input
             onChange={({ target: { value: lastName } }) =>
               updateData({ lastName })
             }
+            spellCheck={false}
             value={data.lastName}
           />
           <input
             onChange={({ target: { value: username } }) =>
               updateData({ username })
             }
+            spellCheck={false}
             value={data.username}
           />
-          <div className="update" onClick={saveData}>
+          <Button className="update" onClick={saveData} type="primary">
             Update user
-          </div>
+          </Button>
         </>
       )}
     </div>

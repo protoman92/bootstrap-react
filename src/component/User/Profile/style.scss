@@ -12,6 +12,7 @@
 
     &.update {
       @include confirm-button;
+      margin-top: 24px;
     }
   }
 }

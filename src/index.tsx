@@ -1,3 +1,4 @@
+import "antd/dist/antd.css";
 import { createBaseClient, createRelativeClient } from "client";
 import App from "component/App/component";
 import "index.scss";
@@ -9,8 +10,8 @@ import { applyMiddleware, createStore } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { thunkUnwrapMiddleware } from "redux/middleware";
 import createReducer from "redux/reducer";
-import * as serviceWorker from "serviceWorker";
 import createURLSyncRepository from "repository/urlSync";
+import * as serviceWorker from "serviceWorker";
 
 if (process.env.NODE_ENV !== "production") {
   const { whyDidYouUpdate } = require("why-did-you-update");
