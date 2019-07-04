@@ -25,6 +25,7 @@ declare global {
   interface HTTPClient<Config = HTTPClient.Config> {
     get<T>(url: string, config?: Config): Promise<T>;
     post<T>(url: string, body: unknown, config?: Config): Promise<T>;
+    patch<T>(url: string, body: unknown, config?: Config): Promise<T>;
   }
 
   namespace RelativeHTTPClient {

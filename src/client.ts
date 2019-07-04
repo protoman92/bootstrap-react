@@ -4,7 +4,9 @@ export function createBaseClient(): HTTPClient {
   return {
     get: (url, config) => axios.get(url, config).then(({ data }) => data),
     post: (url, body, config) =>
-      axios.post(url, body, config).then(({ data }) => data)
+      axios.post(url, body, config).then(({ data }) => data),
+    patch: (url, body, config) =>
+      axios.patch(url, body, config).then(({ data }) => data)
   };
 }
 
@@ -25,6 +27,8 @@ export function createRelativeClient(
     get: (url, config) =>
       client.get(url, { ...config, baseURL: window.location.origin }),
     post: (url, body, config) =>
-      client.post(url, body, { ...config, baseURL: window.location.origin })
+      client.post(url, body, { ...config, baseURL: window.location.origin }),
+    patch: (url, body, config) =>
+      client.patch(url, body, { ...config, baseURL: window.location.origin })
   };
 }
