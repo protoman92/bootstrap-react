@@ -4,13 +4,15 @@ import * as H from "history";
 import querystring from "querystring";
 import React from "react";
 import { Provider } from "react-redux";
-import { createTestComponent, createTestStore } from "testUtils";
+import { asyncTimeout, createTestComponent, createTestStore } from "testUtils";
 import { anything, deepEqual, instance, spy, verify, when } from "ts-mockito";
 import { autoURLDataSync, AutoURLDataSyncProps } from "./dataHOC";
 
 describe("Auto URL data sync", () => {
   interface Data {
-    readonly ids: readonly string[];
+    readonly a: number;
+    readonly b: number;
+    readonly c: number;
   }
 
   let client: RelativeHTTPClient;
@@ -40,22 +42,52 @@ describe("Auto URL data sync", () => {
     );
   });
 
-  it("Should perform get automatically", async done => {
+  it("Should perform get automatically", async () => {
     // Setup
-    const data: Data = { ids: ["1", "2", "3"] };
+    const data: Data = { a: 0, b: 1, c: 2 };
     when(client.get(pathname, anything())).thenResolve(data);
 
     // When
     const wrapper = enzyme.mount(WrappedElement);
+    await asyncTimeout(1);
+    wrapper.setProps({});
+    const { data: propData } = wrapper.find(TestComponent).props();
 
-    setTimeout(() => {
-      wrapper.setProps({});
-      const propData = wrapper.find(TestComponent).props().data;
+    // Then
+    verify(client.get(pathname, deepEqual({ params }))).once();
+    expect(propData).to.eql(data);
+  });
 
-      // Then
-      verify(client.get(pathname, deepEqual({ params }))).once();
-      expect(propData).to.eql(data);
-      done();
-    }, 1);
+  it("Should perform save correctly", async () => {
+    // Setup
+    const data: Data = { a: 0, b: 1, c: 2 };
+    const newData: Data = { a: 1, b: 2, c: 3 };
+    when(client.get(pathname, anything())).thenResolve(data);
+    when(client.patch(pathname, anything(), anything())).thenResolve(newData);
+
+    // When
+    const wrapper = enzyme.mount(WrappedElement);
+    await asyncTimeout(1);
+    wrapper.setProps({});
+    const { updateData } = wrapper.find(TestComponent).props();
+    updateData(newData);
+
+    wrapper.setProps({});
+    const { saveData } = wrapper.find(TestComponent).props();
+    saveData();
+    await asyncTimeout(1);
+
+    wrapper.setProps({});
+    const { data: propData } = wrapper.find(TestComponent).props();
+    await asyncTimeout(1);
+
+    // Then
+    verify(client.get(pathname, deepEqual({ params }))).once();
+
+    verify(
+      client.patch(pathname, deepEqual(newData), deepEqual({ params }))
+    ).once();
+
+    expect(propData).to.eql(newData);
   });
 });

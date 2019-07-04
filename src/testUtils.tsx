@@ -10,7 +10,7 @@ export function asyncTimeout<T extends any[]>(
   ...args: T
 ): Promise<T> {
   return new Promise(resolve => {
-    setTimeout(a => resolve(a), ms, ...args);
+    setTimeout(resolve, ms, ...args);
   });
 }
 
