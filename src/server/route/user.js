@@ -1,7 +1,9 @@
 /** @param {HTTPClient} client */
 function getUser(client) {
   return async ({ params: { id } }, res) => {
-    res.status(200).json(id);
+    res
+      .status(200)
+      .json({ id, firstName: "Hai", lastName: "Pham", username: "haipham" });
   };
 }
 

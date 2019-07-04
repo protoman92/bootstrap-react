@@ -1,15 +1,16 @@
+import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import {
   ComponentEnhancer,
   compose,
   lifecycle,
-  withState,
-  mapProps
+  mapProps,
+  withState
 } from "recompose";
-import { connect } from "react-redux";
 
 export interface AutoURLDataSyncProps<Data> {
   readonly data: Data | null | undefined;
+  updateData(data: Partial<Data>): void;
 }
 
 /**
@@ -36,6 +37,11 @@ export function autoURLDataSync<Data>(): ComponentEnhancer<
         (this.props as any).setData(data);
       }
     }),
-    mapProps<any, any>(({ setData, ...rest }) => rest)
+    mapProps<any, any>(({ data, setData, ...rest }) => ({
+      ...rest,
+      data,
+      updateData: (newData: Partial<Data>) =>
+        setData(Object.assign({}, data, newData))
+    }))
   );
 }

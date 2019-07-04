@@ -38,4 +38,11 @@ declare global {
   interface RelativeHTTPClient extends HTTPClient<RelativeHTTPClient.Config> {}
 
   namespace APIRepository {}
+
+  interface AppUser {
+    readonly id: string;
+    readonly firstName: string;
+    readonly lastName: string;
+    readonly username: string;
+  }
 }
