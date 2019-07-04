@@ -1,7 +1,7 @@
 import { Middleware } from "redux";
 
-export default function(): Middleware<{}, GlobalAction<any>> {
-  return () => dispatch => (action: GlobalAction<any>) => {
+export default function(): Middleware<{}, ReduxAction<any>> {
+  return () => dispatch => (action: ReduxAction<any>) => {
     dispatch(action);
 
     if (action.payload instanceof Function) {

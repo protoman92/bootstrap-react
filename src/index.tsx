@@ -1,14 +1,15 @@
+import { createBaseClient, createRelativeClient } from "client";
 import App from "component/App/component";
 import "index.scss";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import { applyMiddleware, createStore } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { thunkUnwrapMiddleware } from "redux/middleware";
 import createReducer from "redux/reducer";
 import * as serviceWorker from "serviceWorker";
-import { BrowserRouter } from "react-router-dom";
 
 if (process.env.NODE_ENV !== "production") {
   const { whyDidYouUpdate } = require("why-did-you-update");
@@ -16,9 +17,12 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 const reducer = createReducer();
+const baseHTTPClient = createBaseClient();
+const httpClient = createRelativeClient(window, baseHTTPClient);
 
 const store = createStore(
   reducer,
+  { httpClient },
   applyMiddleware(
     thunkUnwrapMiddleware(),
     thunkMiddleware.withExtraArgument({})
