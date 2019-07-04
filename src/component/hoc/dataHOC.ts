@@ -1,3 +1,4 @@
+import querystring from "querystring";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import {
@@ -29,11 +30,12 @@ export function autoURLDataSync<Data>(): ComponentEnhancer<
     lifecycle({
       async componentDidMount() {
         const {
-          location: { pathname }
+          location: { pathname, search }
         }: RouteComponentProps = this.props as any;
 
+        const params = { ...querystring.parse(search.slice(1)) };
         const httpClient: RelativeHTTPClient = (this.props as any).httpClient;
-        const data = await httpClient.get<Data>(pathname);
+        const data = await httpClient.get<Data>(pathname, { params });
         (this.props as any).setData(data);
       }
     }),
