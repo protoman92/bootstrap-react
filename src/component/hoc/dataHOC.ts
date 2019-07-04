@@ -9,6 +9,7 @@ import {
 
 export interface AutoURLDataSyncProps<Data> {
   readonly data: Data | null | undefined;
+  readonly isLoadingData: boolean;
   saveData(): void;
   updateData(data: Partial<Data>): void;
 }
@@ -25,23 +26,37 @@ export function autoURLDataSync<Data>(): ComponentEnhancer<
 > {
   return compose(
     withState("data", "setData", undefined),
+    withState("isLoadingData", "setIsLoadingData", false),
     connect(({ repository: { urlSync } }: ReduxState) => ({ urlSync })),
     lifecycle({
       async componentDidMount() {
-        const { urlSync } = this.props as any;
-        const data = await urlSync.get();
-        (this.props as any).setData(data);
+        const { setIsLoadingData, urlSync } = this.props as any;
+
+        try {
+          setIsLoadingData(true);
+          const data = await urlSync.get();
+          (this.props as any).setData(data);
+        } finally {
+          setIsLoadingData(false);
+        }
       }
     }),
-    mapProps<any, any>(({ urlSync, data, setData, ...rest }) => ({
-      ...rest,
-      data,
-      saveData: async () => {
-        const updated = await urlSync.update(data);
-        setData(updated);
-      },
-      updateData: (newData: Partial<Data>) =>
-        setData(Object.assign({}, data, newData))
-    }))
+    mapProps<any, any>(
+      ({ urlSync, data, setData, setIsLoadingData, ...rest }) => ({
+        ...rest,
+        data,
+        saveData: async () => {
+          try {
+            setIsLoadingData(true);
+            const updated = await urlSync.update(data);
+            setData(updated);
+          } finally {
+            setIsLoadingData(false);
+          }
+        },
+        updateData: (newData: Partial<Data>) =>
+          setData(Object.assign({}, data, newData))
+      })
+    )
   );
 }

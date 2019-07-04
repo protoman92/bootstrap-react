@@ -42,12 +42,19 @@ describe("Auto URL data sync", () => {
 
     // When
     const wrapper = enzyme.mount(WrappedElement);
+    const { isLoadingData: loading1 } = wrapper.find(TestComponent).props();
+    expect(loading1).to.be.ok();
+
     await asyncTimeout(1);
     wrapper.setProps({});
-    const { data: propData } = wrapper.find(TestComponent).props();
+
+    const { data: propData, isLoadingData: loading2 } = wrapper
+      .find(TestComponent)
+      .props();
 
     // Then
     verify(urlSync.get()).once();
+    expect(loading2).not.to.be.ok();
     expect(propData).to.eql(data);
   });
 
@@ -68,15 +75,23 @@ describe("Auto URL data sync", () => {
     wrapper.setProps({});
     const { saveData } = wrapper.find(TestComponent).props();
     saveData();
+    wrapper.setProps({});
+    const { isLoadingData: loading1 } = wrapper.find(TestComponent).props();
+    expect(loading1).to.be.ok();
     await asyncTimeout(1);
 
     wrapper.setProps({});
-    const { data: propData } = wrapper.find(TestComponent).props();
+
+    const { data: propData, isLoadingData: loading2 } = wrapper
+      .find(TestComponent)
+      .props();
+
     await asyncTimeout(1);
 
     // Then
     verify(urlSync.get()).once();
     verify(urlSync.update(deepEqual(newData))).once();
+    expect(loading2).not.to.be.ok();
     expect(propData).to.eql(newData);
   });
 });

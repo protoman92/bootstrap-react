@@ -6,6 +6,7 @@ import "./style.scss";
 
 function PrivateProfile({
   data,
+  isLoadingData,
   saveData,
   updateData
 }: AutoURLDataSyncProps<AppUser>) {
@@ -39,7 +40,12 @@ function PrivateProfile({
             spellCheck={false}
             value={data.username}
           />
-          <Button className="update" onClick={saveData} type="primary">
+          <Button
+            className="update"
+            loading={isLoadingData}
+            onClick={saveData}
+            type="primary"
+          >
             Update user
           </Button>
         </>
