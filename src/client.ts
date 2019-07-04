@@ -10,8 +10,8 @@ export function createBaseClient(): HTTPClient {
 
 /**
  * Treat client and server as if originating from the same domain, and whatever
- * URL the client is at, the server has the corresponding URL that contains
- * the data.
+ * URL the client is at, the server has the corresponding URL that contains the
+ * data.
  *
  * e.g.
  * client -> https://localhost:8000/user/

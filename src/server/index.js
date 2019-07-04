@@ -3,13 +3,16 @@ const express = require("express");
 const fs = require("fs");
 const https = require("https");
 const app = express();
+const createClient = require("./client");
+const createUserRouter = require("./route/user");
 
 config({});
 app.use(express.json());
+app.get("/", (req, res) => res.status(200).send("Hello world"));
 
-app.get("/", (req, res) => {
-  res.status(200).send("hello world");
-});
+const client = createClient();
+const userRouter = createUserRouter(express.Router(), client);
+app.use("/user", userRouter);
 
 const port = process.env.PORT || 8000;
 
