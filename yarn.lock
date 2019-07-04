@@ -1328,6 +1328,11 @@
     "@types/cheerio" "*"
     "@types/react" "*"
 
+"@types/expect.js@^0.3.29":
+  version "0.3.29"
+  resolved "https://registry.yarnpkg.com/@types/expect.js/-/expect.js-0.3.29.tgz#28dd359155b84b8ecb094afc3f4b74c3222dca3b"
+  integrity sha1-KN01kVW4S47LCUr8P0t0wyItyjs=
+
 "@types/express-serve-static-core@*":
   version "4.16.7"
   resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.16.7.tgz#50ba6f8a691c08a3dd9fa7fba25ef3133d298049"
@@ -1456,6 +1461,13 @@
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
+
+"@types/recompose@^0.30.6":
+  version "0.30.6"
+  resolved "https://registry.yarnpkg.com/@types/recompose/-/recompose-0.30.6.tgz#f6ffae2008b84df916ed6633751f9287f344ea3e"
+  integrity sha512-A9c880h07JMrvVe+PwyjVihrQRyKWp4/GFjfA9YE4NgxdEuQD74gSdDhInhUNctO/dkCcR66rexEXevzBy85cQ==
+  dependencies:
+    "@types/react" "*"
 
 "@types/serve-static@*":
   version "1.13.2"
@@ -10740,6 +10752,13 @@ ts-essentials@^2.0.11:
   version "2.0.11"
   resolved "https://registry.yarnpkg.com/ts-essentials/-/ts-essentials-2.0.11.tgz#dc4d5f7c81785d3f624311c70927a9ee128cc385"
   integrity sha512-614uBuD5StmKpJFDio+v3JhGELXMk1TrOJYuP/16q8haNUBsDmG0dI7+sN5Qhukwi2drbvUqdIOlrMKeBpdjwQ==
+
+ts-mockito@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/ts-mockito/-/ts-mockito-2.3.1.tgz#4c3467a2ddeb207966000a740a0826c970125ed1"
+  integrity sha512-chcKw0sTApwJxTyKhzbWxI4BTUJ6RStZKUVh2/mfwYqFS09PYy5pvdXZwG35QSkqT5pkdXZlYKBX196RRvEZdQ==
+  dependencies:
+    lodash "^4.17.5"
 
 ts-pnp@1.1.2, ts-pnp@^1.0.0:
   version "1.1.2"
