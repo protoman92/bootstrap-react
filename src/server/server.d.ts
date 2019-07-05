@@ -1,15 +1,13 @@
-import { Schema, SchemaType, SchemaTypeOpts } from "mongoose";
-import { UserModel } from "./mongo/user";
+import express from "express";
+import { Model, Schema, SchemaType, SchemaTypeOpts } from "mongoose";
 
 declare global {
   type MongoSchemaDefinition<T> = Readonly<
     { [K in keyof T]: SchemaTypeOpts<any> | Schema | SchemaType }
   >;
 
-  namespace MongoModel {
-    type User = typeof UserModel;
-  }
-
-  type Request = import("express").Request;
-  type Response = import("express").Response;
+  type MongoModel = Model<Document, {}>;
+  type Request = express.Request;
+  type Response = express.Response;
+  type Router = express.Router;
 }
