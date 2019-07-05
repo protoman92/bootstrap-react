@@ -10,7 +10,7 @@ import { applyMiddleware, createStore } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { thunkUnwrapMiddleware } from "redux/middleware";
 import createReducer from "redux/reducer";
-import createURLSyncRepository from "repository/urlSync";
+import { createURLSyncRepository } from "repository/dataRepository";
 import * as serviceWorker from "serviceWorker";
 
 if (process.env.NODE_ENV !== "production") {

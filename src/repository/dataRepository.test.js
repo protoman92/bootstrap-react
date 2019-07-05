@@ -1,7 +1,7 @@
 import expect from "expect.js";
 import querystring from "querystring";
 import { anything, deepEqual, instance, spy, verify, when } from "ts-mockito";
-import createURLSyncRepository from "./urlSync";
+import { createURLSyncRepository } from "./dataRepository";
 
 describe("URL sync repository", () => {
   const pathname = "/user/1";

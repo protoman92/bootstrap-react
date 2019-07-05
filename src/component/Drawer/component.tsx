@@ -1,7 +1,6 @@
 import { Menu } from "antd";
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { compose, shouldUpdate } from "recompose";
 import "./style.scss";
 
 interface DrawerItem {
@@ -14,7 +13,7 @@ interface DrawerProps {
   readonly items: readonly DrawerItem[];
 }
 
-function PrivateDrawer({ currentPath, items }: DrawerProps) {
+export default function Drawer({ currentPath, items }: DrawerProps) {
   return (
     <Menu
       className="drawer-container"
@@ -32,7 +31,3 @@ function PrivateDrawer({ currentPath, items }: DrawerProps) {
     </Menu>
   );
 }
-
-const enhance = compose<DrawerProps, DrawerProps>(shouldUpdate(() => false));
-
-export default enhance(PrivateDrawer);
