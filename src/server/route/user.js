@@ -19,11 +19,8 @@ function getUser(userModel) {
 /** @param {MongoModel.User} userModel */
 function updateUser(userModel) {
   return handleError(async ({ body, params: { id } }, res) => {
-    const { _id, ...user } = await userModel
-      .updateOne({ _id: id }, body)
-      .lean();
-
-    res.status(200).json({ id, ...user });
+    await userModel.updateOne({ _id: id }, body).lean();
+    res.status(200).json(body);
   });
 }
 

@@ -15,11 +15,13 @@ function PrivateProfile({
       {!!data && (
         <>
           <input
+            disabled={isLoadingData}
             onChange={({ target: { value: id } }) => updateData({ id })}
             spellCheck={false}
             value={data.id}
           />
           <input
+            disabled={isLoadingData}
             onChange={({ target: { value: firstName } }) =>
               updateData({ firstName })
             }
@@ -27,6 +29,7 @@ function PrivateProfile({
             value={data.firstName}
           />
           <input
+            disabled={isLoadingData}
             onChange={({ target: { value: lastName } }) =>
               updateData({ lastName })
             }
@@ -34,6 +37,7 @@ function PrivateProfile({
             value={data.lastName}
           />
           <input
+            disabled={isLoadingData}
             onChange={({ target: { value: username } }) =>
               updateData({ username })
             }
