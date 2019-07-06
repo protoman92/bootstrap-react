@@ -17,8 +17,9 @@ export interface AutoURLDataSyncProps<Data> {
 /**
  * Automatically sync with current URL by requesting data from server using
  * said URL. This is assuming there is data provided by the server at current
- * URL, e.g. user navigates to /user/1, this will send a GET request to /user/1,
- * which should have a defined backend route that contains the relevant data.
+ * URL, e.g. user navigates to /users/1, this will send a GET request to
+ * /users/1, which should have a defined backend route that contains the
+ * relevant data.
  */
 export function autoURLDataSync<Data>(): ComponentEnhancer<
   AutoURLDataSyncProps<Data>,

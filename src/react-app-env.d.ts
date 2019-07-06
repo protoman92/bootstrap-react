@@ -34,8 +34,8 @@ declare global {
    * contains the data.
    *
    * e.g.
-   * client -> https://localhost:8000/user/
-   * server -> https://localhost:8000/user/1
+   * client -> https://localhost:8000/users/
+   * server -> https://localhost:8000/users/1
    */
   interface RelativeHTTPClient extends HTTPClient {}
 

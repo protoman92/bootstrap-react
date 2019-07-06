@@ -17,12 +17,12 @@ export default function App() {
                 <div className="side-drawer">
                   <Drawer
                     currentPath={currentPath}
-                    items={[{ path: "/user", name: "User" }]}
+                    items={[{ path: "/users", name: "User" }]}
                   />
                 </div>
 
                 <Switch>
-                  <Route component={UserRouter} path="/user" />
+                  <Route component={UserRouter} path="/users" />
                 </Switch>
               </>
             )}

@@ -15,7 +15,7 @@ app.get("/", (req, res) => res.status(200).send("Hello world"));
 const client = createClient();
 
 app.use(
-  "/user",
+  "/users",
   createStandardRouter(express.Router(), { client, mongoModel: UserModel })
 );
 

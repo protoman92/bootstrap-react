@@ -4,7 +4,7 @@ import { anything, deepEqual, instance, spy, verify, when } from "ts-mockito";
 import { createURLSyncRepository } from "./dataRepository";
 
 describe("URL sync repository", () => {
-  const pathname = "/user/1";
+  const pathname = "/users/1";
   const params = { a: "1", b: "2" };
   const search = `?${querystring.stringify(params)}`;
   const location = { pathname, search, state: {}, hash: "" };
