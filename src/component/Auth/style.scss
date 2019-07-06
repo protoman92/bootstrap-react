@@ -1,0 +1,30 @@
+@import "src/global";
+
+.authentication-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  & > .content-container {
+    display: flex;
+    flex: 0 0 calc(100% / 2);
+    flex-direction: column;
+
+    @include md {
+      flex: 0 0 calc(100% / 3);
+    }
+
+    & > * {
+      width: 100%;
+
+      &:not(:first-child) {
+        margin-top: 8px;
+      }
+
+      &.authenticate {
+        @include confirm-button;
+        margin-top: 24px;
+      }
+    }
+  }
+}
