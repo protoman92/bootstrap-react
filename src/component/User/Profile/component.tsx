@@ -1,10 +1,10 @@
 import { Button } from "antd";
+import { createEnhancerChain } from "bootstrap-react-essentials/dist/component/hoc/betterRecompose";
 import {
   autoURLDataSync,
   AutoURLDataSyncProps
 } from "bootstrap-react-essentials/dist/component/hoc/dataHOC";
 import React from "react";
-import { compose } from "recompose";
 import "./style.scss";
 
 function PrivateProfile({
@@ -61,6 +61,6 @@ function PrivateProfile({
   );
 }
 
-const enhance = compose<any, any>(autoURLDataSync());
+const enhancer = createEnhancerChain().compose(autoURLDataSync<AppUser>());
 
-export default enhance(PrivateProfile);
+export default enhancer.enhance(PrivateProfile);

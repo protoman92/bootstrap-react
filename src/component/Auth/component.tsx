@@ -1,6 +1,10 @@
 import { Button } from "antd";
+import {
+  createEnhancerChain,
+  withState
+} from "bootstrap-react-essentials/dist/component/hoc/betterRecompose";
 import React from "react";
-import { compose, withState, withHandlers } from "recompose";
+import { withHandlers } from "recompose";
 import "./style.scss";
 
 interface AuthenticationProps {
@@ -39,12 +43,13 @@ function PrivateAuthentication({
   );
 }
 
-const enhance = compose<AuthenticationProps, {}>(
-  withState("username", "setUsername", ""),
-  withState("password", "setPassword", ""),
-  withHandlers<Pick<AuthenticationProps, "username" | "password">, {}>({
-    authenticate: ({ username, password }) => () => {}
-  })
-);
+const enhancer = createEnhancerChain()
+  .compose(withState("username", "setUsername", ""))
+  .compose(withState("password", "setPassword", ""))
+  .compose(
+    withHandlers({
+      authenticate: ({ username, password }) => () => {}
+    })
+  );
 
-export default enhance(PrivateAuthentication);
+export default enhancer.enhance(PrivateAuthentication);
