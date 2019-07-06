@@ -1,6 +1,5 @@
 import { combineReducers, Reducer } from "redux";
-import { Omit } from "ts-essentials";
 
-export default function(): Reducer<Omit<ReduxState, "repository">> {
+export default function(): Reducer<OmitKeys<ReduxState, "repository">> {
   return combineReducers({});
 }

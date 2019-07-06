@@ -1,5 +1,8 @@
 import { Button } from "antd";
-import { autoURLDataSync, AutoURLDataSyncProps } from "component/hoc/dataHOC";
+import {
+  autoURLDataSync,
+  AutoURLDataSyncProps
+} from "bootstrap-react-essentials/dist/component/hoc/dataHOC";
 import React from "react";
 import { compose } from "recompose";
 import "./style.scss";

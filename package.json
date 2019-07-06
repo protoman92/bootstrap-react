@@ -5,6 +5,7 @@
   "dependencies": {
     "antd": "^3.20.0",
     "axios": "^0.19.0",
+    "bootstrap-react-essentials": "^1.1.1",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "mongoose": "^5.6.3",
@@ -45,7 +46,6 @@
     "@types/dotenv": "^6.1.1",
     "@types/enzyme": "^3.10.1",
     "@types/enzyme-adapter-react-16": "^1.0.5",
-    "@types/expect.js": "^0.3.29",
     "@types/express": "^4.17.0",
     "@types/jest": "^24.0.15",
     "@types/mongoose": "^5.5.7",
@@ -56,10 +56,8 @@
     "concurrently": "^4.1.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
-    "expect.js": "^0.3.1",
     "node-sass": "^4.12.0",
     "nodemon": "^1.19.1",
-    "ts-essentials": "^2.0.11",
     "ts-mockito": "^2.3.1",
     "typescript": "^3.5.2",
     "why-did-you-update": "^1.0.6"

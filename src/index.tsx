@@ -1,5 +1,11 @@
 import "antd/dist/antd.css";
-import { createBaseClient, createRelativeClient } from "client";
+import "bootstrap-react-essentials/dist/global";
+import {
+  createBaseClient,
+  createRelativeClient
+} from "bootstrap-react-essentials/dist/http/client";
+import thunkUnwrapMiddleware from "bootstrap-react-essentials/dist/redux/middleware/thunkUnwrap";
+import { createURLDataSyncRepository } from "bootstrap-react-essentials/dist/repository/dataRepository";
 import App from "component/App/component";
 import "index.scss";
 import React from "react";
@@ -8,9 +14,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { applyMiddleware, createStore } from "redux";
 import thunkMiddleware from "redux-thunk";
-import { thunkUnwrapMiddleware } from "redux/middleware";
 import createReducer from "redux/reducer";
-import { createURLSyncRepository } from "repository/dataRepository";
 import * as serviceWorker from "serviceWorker";
 
 if (process.env.NODE_ENV !== "production") {
@@ -22,8 +26,8 @@ const reducer = createReducer();
 const baseHTTPClient = createBaseClient();
 const relativeClient = createRelativeClient(window, baseHTTPClient);
 
-const repository: APIRepository = {
-  urlSync: createURLSyncRepository(window, relativeClient)
+const repository = {
+  urlSync: createURLDataSyncRepository(window, relativeClient)
 };
 
 const store = createStore(
