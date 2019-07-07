@@ -16,7 +16,7 @@ function getData(mongoModel) {
       .find(
         Object.entries(query)
           .map(([key, value]) => ({
-            [key]: { $eq: value }
+            [key]: { $in: value }
           }))
           .reduce((acc, val) => ({ ...acc, ...val }), {})
       )
