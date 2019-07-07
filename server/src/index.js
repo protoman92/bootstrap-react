@@ -27,8 +27,8 @@ async function initialize() {
   https
     .createServer(
       {
-        key: fs.readFileSync("src/server/server.key"),
-        cert: fs.readFileSync("src/server/server.cert")
+        key: fs.readFileSync("src/server.key"),
+        cert: fs.readFileSync("src/server.cert")
       },
       app
     )

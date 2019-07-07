@@ -1,3 +1,3 @@
 # bootstrap-react
 
-Bootstrap React project for my personal preferences. Based on [`create-react-app`](https://github.com/facebook/create-react-app).
+Client and server bootstrap for quick development of a React project.

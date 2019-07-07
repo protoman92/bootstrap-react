@@ -1,5 +1,6 @@
 import express from "express";
-import { Model, Schema, SchemaType, SchemaTypeOpts } from "mongoose";
+import { Document, Model, Schema, SchemaType, SchemaTypeOpts } from "mongoose";
+import "../../global";
 
 declare global {
   type MongoSchemaDefinition<T> = Readonly<
@@ -7,7 +8,6 @@ declare global {
   >;
 
   type MongoModel = Model<Document, {}>;
-  type Request = express.Request;
-  type Response = express.Response;
   type Router = express.Router;
+  type RequestHandler = express.RequestHandler;
 }

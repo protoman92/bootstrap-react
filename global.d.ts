@@ -1,4 +1,3 @@
-/// <reference types="react-scripts" />
 import "bootstrap-react-essentials/dist/global";
 
 declare global {

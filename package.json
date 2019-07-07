@@ -1,66 +1,27 @@
 {
   "name": "bootstrap-react",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "antd": "^3.20.0",
-    "axios": "^0.19.0",
-    "bootstrap-react-essentials": "^1.1.1",
-    "dotenv": "^8.0.0",
-    "express": "^4.17.1",
-    "mongoose": "^5.6.3",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-redux": "^7.1.0",
-    "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1",
-    "recompose": "^0.30.0",
-    "redux": "^4.0.1",
-    "redux-saga": "^1.0.5",
-    "redux-thunk": "^2.3.0"
-  },
+  "version": "1.0.0",
+  "description": "Bootstrapped React project",
+  "main": "index.js",
+  "repository": "https://github.com/protoman92/bootstrap-react.git",
+  "author": "Hai Pham <swiften.svc@gmail.com>",
+  "license": "MIT",
   "scripts": {
-    "start:be:dev": "nodemon",
-    "start:fe:dev": "HTTPS=true react-scripts start",
-    "start:dev": "concurrently \"yarn start:be:dev\" \"yarn start:fe:dev\"",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "install:fe": "cd client && yarn",
+    "install:be": "cd server && yarn",
+    "postinstall": "yarn install:be && yarn install:fe",
+    "essentials:fe": "cd client && yarn upgrade bootstrap-react-essentials",
+    "essentials": "yarn upgrade --dev bootstrap-react-essentials && yarn essentials:fe",
+    "start:fe:dev": "cd client && yarn start",
+    "start:be:dev": "cd server && yarn start:dev",
+    "start:dev": "concurrently \"yarn start:be:dev\" \"yarn start:fe:dev\""
   },
   "devDependencies": {
-    "@types/dotenv": "^6.1.1",
-    "@types/enzyme": "^3.10.1",
-    "@types/enzyme-adapter-react-16": "^1.0.5",
-    "@types/express": "^4.17.0",
-    "@types/jest": "^24.0.15",
-    "@types/mongoose": "^5.5.7",
-    "@types/react-dom": "^16.8.4",
-    "@types/react-redux": "^7.1.1",
-    "@types/react-router-dom": "^4.3.4",
+    "@types/react": "^16.8.23",
     "@types/recompose": "^0.30.6",
+    "@types/redux": "^3.6.0",
+    "bootstrap-react-essentials": "^1.8.1",
     "concurrently": "^4.1.1",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.14.0",
-    "node-sass": "^4.12.0",
-    "nodemon": "^1.19.1",
-    "ts-mockito": "^2.3.1",
-    "typescript": "^3.5.2",
-    "why-did-you-update": "^1.0.6"
-  },
-  "proxy": "https://localhost:8000"
+    "ts-essentials": "^2.0.12"
+  }
 }

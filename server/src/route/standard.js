@@ -11,6 +11,7 @@ function createData(mongoModel) {
 /** @param {MongoModel} mongoModel */
 function getData(mongoModel) {
   return handleError(async ({ query: { limit, ...query } }, res) => {
+    /** @type {any[]} The data returned by the find query. */
     let data = await mongoModel
       .find(
         Object.entries(query)
