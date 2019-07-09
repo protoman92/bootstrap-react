@@ -26,8 +26,8 @@ const reducer = createReducer();
 const baseHTTPClient = createBaseClient();
 const relativeClient = createRelativeClient(window, baseHTTPClient);
 
-const repository = {
-  urlSync: createURLDataSyncRepository(window, relativeClient)
+const repository: Repository = {
+  urlDataSync: createURLDataSyncRepository(window, relativeClient)
 };
 
 const store = createStore(

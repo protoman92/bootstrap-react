@@ -3,9 +3,9 @@
 
 
 "@babel/runtime@^7.0.0":
-  version "7.5.2"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.5.2.tgz#98f584f4d03be5d8142c77107ffaedee4d5956f1"
-  integrity sha512-9M29wrrP7//JBGX70+IrDuD1w4iOYhUGpJNMQJVNAXue+cFeFlMTqBECouIziXPUphlgrfjcfiEpGX4t0WGK4g==
+  version "7.5.3"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.5.3.tgz#ad06e9d28539426fc20869f0b3d9ed6c21bed909"
+  integrity sha512-09kHrO2Y0JWybW20qnt+UMlNTj7NUQByP6ubyq50Yj1QCDhbHfEmWk/uso+SaEi5XKNEWYVKbBgdiZisIaBPmw==
   dependencies:
     regenerator-runtime "^0.13.2"
 
@@ -67,9 +67,9 @@ axios@^0.19.0:
     is-buffer "^2.0.2"
 
 bootstrap-react-essentials@^1.8.1:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/bootstrap-react-essentials/-/bootstrap-react-essentials-1.9.0.tgz#ae86b76b4551a36052b8b4b0f1c0ea22608902d1"
-  integrity sha512-wuUw93cviV37R/LAt1J2zMJtaWUtvkzhjiDcwtwM0boMeNkWeF2rwEHM04FdQLqC3DGGlGE8e0EcipXo9poXEw==
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/bootstrap-react-essentials/-/bootstrap-react-essentials-1.10.1.tgz#c9dd6c31e6535713087efe98071aa213fb3faec2"
+  integrity sha512-Ma6PV17nP2TAB0GcJ+LKRZelv6rZDVryYW4WlIE3Cq714zV3fW9b8dD87rkJQ9BU+idlNLxL7bLSW1WceSziVg==
   dependencies:
     axios "^0.19.0"
     recompose "^0.30.0"
@@ -545,9 +545,9 @@ recompose@^0.30.0:
     symbol-observable "^1.0.4"
 
 redux@*:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.1.tgz#436cae6cc40fbe4727689d7c8fae44808f1bfef5"
-  integrity sha512-R7bAtSkk7nY6O/OYMVR9RiBI+XghjF9rlbl5806HJbQph0LJVHZrU5oaO4q70eUKiqMRqm4y07KLTlMZ2BlVmg==
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.3.tgz#0ca18be085e6cf6ed50e445a125f85e8b26b266b"
+  integrity sha512-v/Iaw67Pe+na+cZvcKvPxAKT1ww5kM+M09fmaCndCQC4Lo434AYb5975HJgJlp0D7dJxfYaLxMD4VwfpLOZ1Rw==
   dependencies:
     loose-envify "^1.4.0"
     symbol-observable "^1.2.0"
