@@ -2397,9 +2397,9 @@ boolbase@^1.0.0, boolbase@~1.0.0:
   integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
 
 bootstrap-react-essentials@^1.1.1:
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/bootstrap-react-essentials/-/bootstrap-react-essentials-1.8.1.tgz#592eaeb1fa5a15228620f25fcb11d53972038eca"
-  integrity sha512-RtfgufQ4XzZv7g1TKVdrsvORV9YNSkmzdb8sAm54W5bvlkdeWxngLZWq/UGd+1ScEX4Gfw+FCE9mZTlACEc42g==
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/bootstrap-react-essentials/-/bootstrap-react-essentials-1.9.0.tgz#ae86b76b4551a36052b8b4b0f1c0ea22608902d1"
+  integrity sha512-wuUw93cviV37R/LAt1J2zMJtaWUtvkzhjiDcwtwM0boMeNkWeF2rwEHM04FdQLqC3DGGlGE8e0EcipXo9poXEw==
   dependencies:
     axios "^0.19.0"
     recompose "^0.30.0"

@@ -9,6 +9,8 @@ const { UserModel } = require("../mongo/user");
  * @return {Router} The router object that has had its routes defined.
  */
 module.exports = function(router, client) {
+  router.get("", (req, res) => res.status(200).send("Hello world"));
+
   router.use(
     "/v1/users",
     createStandardRouter(express.Router(), { client, mongoModel: UserModel })
