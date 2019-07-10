@@ -11,20 +11,22 @@ function createData(mongoModel) {
 /** @param {MongoModel} mongoModel */
 function getData(mongoModel) {
   return handleError(async ({ query: { limit, ...query } }, res) => {
-    /** @type {any[]} The data returned by the find query. */
-    let data = await mongoModel
-      .find(
-        Object.entries(query)
-          .map(([key, value]) => ({
-            [key]: { $in: value }
-          }))
-          .reduce((acc, val) => ({ ...acc, ...val }), {})
-      )
-      .limit(limit)
-      .lean();
+    const collection = mongoModel.find(
+      Object.entries(query)
+        .map(([key, value]) => ({ [key]: { $in: value } }))
+        .reduce((acc, val) => ({ ...acc, ...val }), {})
+    );
 
+    /** @type {any[]} The data returned by the find query. */
+    let data = await collection.limit(limit).lean();
     data = data.map(({ _id: id, ...datum }) => ({ id, ...datum }));
-    res.status(200).json({ data });
+
+    /**
+     * @type {number} This is the raw count that ignores pagination, i.e. the
+     * number of items that matches the query.
+     */
+    const count = await collection.estimatedDocumentCount();
+    res.status(200).json({ data, count });
   });
 }
 
