@@ -1,16 +1,18 @@
 const initializeDB = require("./mongo/database");
+const {
+  createHTTPClient
+} = require("bootstrap-nodejs-essentials/dist/http/client");
 const { config } = require("dotenv");
 const express = require("express");
 const fs = require("fs");
 const https = require("https");
 const app = express();
-const createClient = require("./client");
 const createRouter = require("./route");
 
 config({});
 app.use(express.json());
 
-const client = createClient();
+const client = createHTTPClient();
 app.use("/api", createRouter(express.Router(), client));
 
 const port = process.env.PORT || 8000;

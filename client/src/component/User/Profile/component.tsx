@@ -1,28 +1,25 @@
 import { Button } from "antd";
-import { createEnhancerChain } from "bootstrap-react-essentials/dist/component/hoc/betterRecompose";
 import {
-  autoURLDataSync,
-  AutoURLDataSyncProps
+  urlDataSync,
+  URLDataSyncInProps
 } from "bootstrap-react-essentials/dist/component/hoc/dataHOC";
 import React from "react";
+import { connect } from "react-redux";
+import { compose } from "recompose";
 import "./style.scss";
+import { lifecycle } from "bootstrap-react-essentials/dist/component/hoc/betterRecompose";
 
 function PrivateProfile({
   data,
   isLoadingData,
   saveData,
   updateData
-}: AutoURLDataSyncProps<AppUser>) {
+}: URLDataSyncInProps<AppUser>) {
   return (
     <div className="profile-container">
       {!!data && (
         <>
-          <input
-            disabled={isLoadingData}
-            onChange={({ target: { value: id } }) => updateData({ id })}
-            spellCheck={false}
-            value={data.id}
-          />
+          <input disabled={true} readOnly spellCheck={false} value={data._id} />
           <input
             disabled={isLoadingData}
             onChange={({ target: { value: firstName } }) =>
@@ -61,6 +58,14 @@ function PrivateProfile({
   );
 }
 
-const enhancer = createEnhancerChain().compose(autoURLDataSync<AppUser>());
+const enhancer = compose<any, any>(
+  connect(({ repository: { urlDataSync } }: ReduxState) => ({ urlDataSync })),
+  urlDataSync<AppUser>(),
+  lifecycle({
+    componentDidMount() {
+      (this.props as any).getData();
+    }
+  })
+);
 
-export default enhancer.enhance(PrivateProfile);
+export default enhancer(PrivateProfile);

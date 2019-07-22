@@ -1,3 +1,4 @@
+import "bootstrap-nodejs-essentials/dist/global";
 import express from "express";
 import { Document, Model, Schema, SchemaType, SchemaTypeOpts } from "mongoose";
 import "../../global";

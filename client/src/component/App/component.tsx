@@ -17,7 +17,7 @@ export default function App() {
                 <div className="side-drawer">
                   <Drawer
                     currentPath={currentPath}
-                    items={[{ path: "/users", name: "User" }]}
+                    items={[{ path: "/users", name: "Users" }]}
                   />
                 </div>
 

@@ -18,8 +18,8 @@ import createReducer from "redux/reducer";
 import * as serviceWorker from "serviceWorker";
 
 if (process.env.NODE_ENV !== "production") {
-  const { whyDidYouUpdate } = require("why-did-you-update");
-  whyDidYouUpdate(React);
+  // const { whyDidYouUpdate } = require("why-did-you-update");
+  // whyDidYouUpdate(React);
 }
 
 const reducer = createReducer();

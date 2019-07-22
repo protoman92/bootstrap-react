@@ -1,5 +1,7 @@
 const express = require("express");
-const createStandardRouter = require("./standard");
+const {
+  createStandardMongoDBRouter
+} = require("bootstrap-nodejs-essentials/dist/route/standardMongo");
 const { UserModel } = require("../mongo/user");
 
 /**
@@ -9,12 +11,9 @@ const { UserModel } = require("../mongo/user");
  * @return {Router} The router object that has had its routes defined.
  */
 module.exports = function(router, client) {
-  router.get("", (req, res) => {
-    res.status(200).send("Hello world");
-  });
+  router.get("", (req, res) => res.status(200).send("Hello world"));
 
-  const userRouter = createStandardRouter(express.Router(), {
-    client,
+  const userRouter = createStandardMongoDBRouter(express.Router(), {
     mongoModel: UserModel
   });
 
